@@ -1,6 +1,6 @@
 class MyHashMap {
 public:
-    const int CAPACITY = 10007;
+    static const int CAPACITY = 10007;
     vector<list<pair<int,int>>>table;
     MyHashMap() {
         table.resize(CAPACITY);
