@@ -1,21 +1,42 @@
 class MyHashMap {
 public:
-    int data[1000001];
+    const int CAPACITY = 10007;
+    vector<list<pair<int,int>>>table;
     MyHashMap() {
-       memset(data, -1, sizeof(data)); 
-        
+        table.resize(CAPACITY);
     }
-    
+    int hash(int key){
+        return key%CAPACITY;
+    }
     void put(int key, int value) {
-        data[key] = value;
+        int index = hash(key);
+        auto& bucket = table[index];
+        for(auto& entry: bucket){
+            if(entry.first == key){
+                entry.second = value;
+                return;
+            }
+        }
+        bucket.push_back({key,value});
     }
     
     int get(int key) {
-        return data[key];
+        int index = hash(key);
+        auto& bucket = table[index];
+        for(auto& entry: bucket){
+            if (entry.first == key)
+                return entry.second;
+        }
+        return -1;
     }
     
     void remove(int key) {
-        data[key] = -1;
+        int index = hash(key);
+        auto& bucket = table[index];
+        for(auto& entry: bucket){
+            if (entry.first == key)
+                entry.second = -1;
+        }
     }
 };
 
