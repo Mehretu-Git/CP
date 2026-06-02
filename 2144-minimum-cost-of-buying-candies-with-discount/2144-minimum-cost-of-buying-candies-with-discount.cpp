@@ -2,7 +2,6 @@ class Solution {
 public:
     int minimumCost(vector<int>& cost) {
         sort(cost.begin(),cost.end());
-        int min_cost = 0;
         int max_cost = 0;
         int discount = 0;
         if(cost.size()==1) return cost[0];
