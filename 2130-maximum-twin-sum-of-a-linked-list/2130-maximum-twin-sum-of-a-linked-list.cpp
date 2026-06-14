@@ -10,20 +10,39 @@
  */
 class Solution {
 public:
+    ListNode* reverseList(ListNode* head){
+        ListNode *curr = head, *prev = nullptr, *next;
+        while (curr != nullptr) {
+
+            // Store next
+            next = curr->next;
+
+            // Reverse current node's next pointer
+            curr->next = prev;
+
+            // Move pointers one position ahead
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
     int pairSum(ListNode* head) {
         int max{};
-        vector<int>nums = {};
-        while(head){
-            nums.push_back(head->val);
-            head = head->next;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        int left = 0;
-        int right = nums.size()-1;
-        while(right>left){
-            int tempSum = nums[left] + nums[right];
-            max = max>tempSum?max:tempSum;
-            left++;
-            right--;
+        ListNode* mid  = reverseList(slow->next);
+
+        ListNode* twin1 = head;
+        ListNode* twin2 = mid;
+        while(twin2){
+            int twinSum = twin1->val + twin2->val;
+            max = twinSum>max?twinSum:max;
+            twin1 = twin1->next;
+            twin2 = twin2->next;
         }
         return max;
     }
