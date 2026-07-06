@@ -1,18 +1,23 @@
 class Solution {
 public:
-    int removeCoveredIntervals(vector<vector<int>>& intervals) {
-        
-        sort(intervals.begin(), intervals.end(), [](const std::vector<int>& a, const std::vector<int>& b) {
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {  
+        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
             if (a[0] == b[0]) {
                 return a[1] > b[1];
             }
             return a[0] < b[0];
         });
-        stack<int> stack;
-        stack.push(intervals[0][1]);
-        for(int i{1}; i < intervals.size(); i++){
-            if(stack.top() < intervals[i][1]) stack.push(intervals[i][1]);
+        
+        int remainingCount = 0;
+        int maxEnd = 0;
+
+        for (const auto& interval : intervals) {
+            if (interval[1] > maxEnd) {
+                remainingCount++;
+                maxEnd = interval[1];
+            }
         }
-        return stack.size();
+
+        return remainingCount;
     }
 };
