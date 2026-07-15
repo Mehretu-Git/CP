@@ -3,7 +3,7 @@ public:
     vector<int> arrayRankTransform(vector<int>& arr) {
         vector<int> ans;
         set<int> nums(arr.begin(), arr.end());
-        map<int,int> arrToRank;
+        unordered_map<int,int> arrToRank;
         
         int i{1};
         for(const auto& num: nums){
