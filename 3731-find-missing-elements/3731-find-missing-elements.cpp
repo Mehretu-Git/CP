@@ -9,7 +9,7 @@ public:
         unordered_set<int> rNums(nums.begin(), nums.end());
 
        for(int i = mn; i<=mx; i++)
-            if(!rNums.contains(i)) ans.push_back(i);
+            if(rNums.count(i)==0) ans.push_back(i);
        
        return ans;
     }
